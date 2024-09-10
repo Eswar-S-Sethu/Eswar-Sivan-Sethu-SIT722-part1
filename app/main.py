@@ -13,6 +13,11 @@ Base.metadata.create_all(bind=engine)
 # Initialize FastAPI app
 app = FastAPI()
 
+# Root endpoint
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Book API!"}
+
 # Endpoint to create a new book
 @app.post("/books/", response_model=BookInDB)
 def create_book(book: BookCreate, db: Session = Depends(get_db)):
